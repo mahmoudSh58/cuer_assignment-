@@ -86,7 +86,8 @@ pipeline {
                 sh '''
                     aws eks update-kubeconfig \
                     --region $AWS_REGION \
-                    --name $CLUSTER_NAME
+                    --name $CLUSTER_NAME \
+                    --alias public
                 '''
             }
         }
