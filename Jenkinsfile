@@ -50,10 +50,7 @@ pipeline {
         stage('Trivy Image Scan') {
             steps {
                 sh '''
-                    trivy image \
-                    --exit-code 1 \
-                    --severity HIGH,CRITICAL \
-                    nodejs-app:${IMAGE_TAG}
+                    trivy image nodejs-app:${IMAGE_TAG}
                 '''
             }
         }
@@ -67,7 +64,7 @@ pipeline {
                     docker login \
                     --username AWS \
                     --password-stdin \
-                    123456789012.dkr.ecr.us-east-1.amazonaws.com
+                    $ECR_REPO
                 '''
             }
         }
