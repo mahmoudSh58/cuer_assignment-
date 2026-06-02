@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         AWS_REGION  = 'us-east-1'
-        CLUSTER_NAME = 'my-cluster'
-        ECR_REPO = '123456789012.dkr.ecr.us-east-1.amazonaws.com/nodejs-app'
+        CLUSTER_NAME = 'cuer-assign'
+        ECR_REPO = '617998378772.dkr.ecr.us-east-1.amazonaws.com/cuer_assign/nodjs-app'
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
@@ -13,7 +13,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-org/nodejs-app.git'
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/mahmoudSh58/cuer_assignment-.git'
             }
         }
 
@@ -64,21 +65,7 @@ pipeline {
             }
         }
 
-        stage('Configure AWS') {
-            steps {
-                withCredentials([
-                    string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
-                ]) {
-                    sh '''
-                        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-                        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-                        aws configure set region $AWS_REGION
-                    '''
-                }
-            }
-        }
-
+        
         stage('Login To ECR') {
             steps {
                 sh '''
