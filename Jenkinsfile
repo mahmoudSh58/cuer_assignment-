@@ -96,9 +96,9 @@ pipeline {
             steps {
                 sh '''
                     kubectl set image deployment/nodejs-app \
-                    nodejs-app=${ECR_REPO}:${IMAGE_TAG}
+                    nodejs-app=${ECR_REPO}:${IMAGE_TAG} -n nodejs
 
-                    kubectl rollout status deployment/nodejs-app
+                    kubectl rollout status deployment/nodejs-app -n nodejs
                 '''
             }
         }
