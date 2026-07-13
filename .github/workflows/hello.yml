@@ -1,0 +1,19 @@
+name: My First Workflow          # Shown in the Actions tab
+
+on: [push]                     # Run whenever code is pushed
+
+jobs:
+  greet:                          # Job ID (you pick the name)
+    runs-on: ubuntu-latest        # The runner OS
+    steps:
+      - name: Say hello
+        run: echo "Hello, GitHub Actions! 👋"
+
+      - name: Show the date
+        run: date
+
+      - name: Multi-line script
+        run: |
+          echo "You can run several commands"
+          echo "using the pipe (|) block."
+          ls -la
