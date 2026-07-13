@@ -1,6 +1,14 @@
 name: My First Workflow          # Shown in the Actions tab
 
-on: [push]                     # Run whenever code is pushed
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deploy target"
+        required: true
+        default: "staging"
+        type: choice
+        options: [staging, production]
 
 jobs:
   greet:                          # Job ID (you pick the name)
